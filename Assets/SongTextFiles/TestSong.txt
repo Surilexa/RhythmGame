@@ -1,0 +1,2 @@
+00:01.000,"Spike",{1,2,3} //this will spawn a spike at column 1,2,3 at time 1 sec.
+csv file (comma sep list)

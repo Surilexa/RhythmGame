@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         
-        Debug.Log(target.position);
+       // Debug.Log(target.position);
     }
 
     private void Update()
@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
             sinTime = Math.Clamp(sinTime, 0, Mathf.PI);
             float t = speedCurve.Evaluate(sinTime);
             transform.position = Vector3.Lerp(current.position, target.position, t);
-            Debug.Log(transform.position);
+            //Debug.Log(transform.position);
         }
         else if(transform.position == location)
         {

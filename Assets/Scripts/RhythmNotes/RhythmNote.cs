@@ -7,28 +7,27 @@ using static UnityEngine.GraphicsBuffer;
 
 public abstract class RhythmNote : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //this is the default for all rhythm notes and obstacles.
     [SerializeField] private AnimationCurve speedCurve;
-
+    private int difficulty = 1;
     private float moveSpeed =.1f;
-    private float sinTime = 1;
+    private Transform startLocation;
 
     public virtual void Start()
     {
-        
+        startLocation = this.transform;
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-
+        transform.position -= new Vector3 (0, Time.deltaTime * moveSpeed * difficulty, 0);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Perfect")
+        if(collision.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
         }
     }
-    
 }
