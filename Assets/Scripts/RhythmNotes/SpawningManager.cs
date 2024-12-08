@@ -11,6 +11,9 @@ public class SpawningManager : MonoBehaviour
     private Dictionary<string, GameObject> spawnableDictionary;
 
     [SerializeField] TextAsset spawnTextAsset;
+
+    public List<Notes> song = new List<Notes>();
+    
     //temp spawning logic
 
     private void Start()
@@ -20,6 +23,14 @@ public class SpawningManager : MonoBehaviour
         TextAsset songFile = Resources.Load<TextAsset>("NewSong");
         ReadTextFile(songFile);
     }
+    private void Update()
+    {
+        if(Time.time >= song[0].time)
+        {
+            Instantiate(song[0].obj, spawnLoc[song[0].column].position, Quaternion.identity);
+            song.Remove(song[0]);
+        }
+    }
     public void spawningLogic(List<int> locations)
     {
         List<int> newLocations = new List<int>();
@@ -27,7 +38,6 @@ public class SpawningManager : MonoBehaviour
         foreach (int location in locations)
         {
             newLocations.AddRange(locations);
-            //Instantiate(spawnableObjects[Random.Range(0, spawnableObjects.Count - 1)], SpawnLoc[locations[i]].position, Quaternion.identity);
         }
     }
     
@@ -41,7 +51,6 @@ public class SpawningManager : MonoBehaviour
     }
     private void ReadTextFile(TextAsset file)
     {
-        SongNoteData song = new SongNoteData {  };
         Notes note = new Notes();
         string[] data = file.text.Split('\n');
 
@@ -60,8 +69,9 @@ public class SpawningManager : MonoBehaviour
             Debug.Log("Time: " + note.time);
             Debug.Log("Column: " + note.column);
             Debug.Log("Type: " + note.obj);
-            //song.notes.Add(note);
-            Instantiate(note.obj, spawnLoc[note.column].position, Quaternion.identity);
+            song.Add(note);
+            Debug.Log("Song Length: " + song.Count);
+            
         }
     }
     private float ConvertTimeIntoFloat(int min, int sec, int mil)
@@ -80,16 +90,16 @@ public class SpawningManager : MonoBehaviour
             }
         }
     }
+
+    public void resetSongData()
+    {
+        song = new List<Notes> { };
+    }
     public struct Notes
     {
         [SerializeField] public int column;
         [SerializeField] public float time;
         [SerializeField] public GameObject obj;
     }
-    public struct SongNoteData
-    {
-        [SerializeField] public List<Notes> notes;
-    }
-
 
 }
