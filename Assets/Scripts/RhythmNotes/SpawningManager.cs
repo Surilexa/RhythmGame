@@ -41,21 +41,27 @@ public class SpawningManager : MonoBehaviour
     }
     private void ReadTextFile(TextAsset file)
     {
-        SongNoteData song = new SongNoteData();
+        SongNoteData song = new SongNoteData {  };
         Notes note = new Notes();
         string[] data = file.text.Split('\n');
 
-        Debug.Log(data.Length);
+        //Debug.Log(data.Length);
         for (int i = 1; i < data.Length; i++)
         {
+            note = new Notes();
             string[] row = data[i].Split(new char[] { ',' });
             note.time = ConvertTimeIntoFloat(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]));
             note.column = Convert.ToInt32(row[3]);
-            //note.obj = spawnableDictionary[row[4]];
+
+            note.obj = spawnableDictionary[row[4].Trim()];
+            
+
+
             Debug.Log("Time: " + note.time);
             Debug.Log("Column: " + note.column);
             Debug.Log("Type: " + note.obj);
             //song.notes.Add(note);
+            Instantiate(note.obj, spawnLoc[note.column].position, Quaternion.identity);
         }
     }
     private float ConvertTimeIntoFloat(int min, int sec, int mil)

@@ -10,7 +10,7 @@ public abstract class RhythmNote : MonoBehaviour
     //this is the default for all rhythm notes and obstacles.
     [SerializeField] private AnimationCurve speedCurve;
     private int difficulty = 1;
-    private float moveSpeed =.1f;
+    private float moveSpeed = 1f;
     private Transform startLocation;
 
     public virtual void Start()
@@ -25,6 +25,7 @@ public abstract class RhythmNote : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if(collision.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);

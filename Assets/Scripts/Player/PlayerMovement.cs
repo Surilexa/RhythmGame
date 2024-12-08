@@ -21,8 +21,6 @@ public class PlayerMovement : MonoBehaviour
     private Transform current;
     public Transform target;
     private float sinTime =0;
-
-    // Start is called before the first frame update
     void Start()
     {
 
@@ -44,19 +42,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        /*if (!move)
+        if (!move)
         {
             var timeStamp = Time.deltaTime + moveDelay;
             if(timeStamp <= Time.deltaTime)
             {
                 move = true;
             }
-        }*/
+        }
+
+        //this will move the note object down overtime at the speed based on diffictuly.
         if(target.position != null && move)
         {
             TravelToLocation(target.position, previousPosition, currentPosition);
         }
-        
     }
 
     private void OnEnable()
@@ -104,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
         currentPosition = 3;
     }
 
+    //this will move the player to to a set location based on the key pressed. 
     public void TravelToLocation(Vector3 location, int previousPos, int currentPos)
     {
         if(transform.position != location)
@@ -114,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position = Vector3.Lerp(current.position, target.position, t);
             //Debug.Log(transform.position);
         }
+        //resets the sinTime to replay the animation curve.
         else if(transform.position == location)
         {
             sinTime = 0;
