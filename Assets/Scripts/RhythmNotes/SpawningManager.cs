@@ -10,11 +10,11 @@ public class SpawningManager : MonoBehaviour
     [SerializeField] List<GameObject> spawnableObjects;
     private Dictionary<string, GameObject> spawnableDictionary;
 
-    [SerializeField] TextAsset spawnTextAsset;
-
     public List<Notes> song = new List<Notes>();
     
-    //temp spawning logic
+    //Variables
+    private float delaySongAfterStart = 3;
+    private float songTime;
 
     private void Start()
     {
@@ -25,39 +25,20 @@ public class SpawningManager : MonoBehaviour
     }
     private void Update()
     {
-        if(Time.time >= song[0].time)
-        {
-            Instantiate(song[0].obj, spawnLoc[song[0].column].position, Quaternion.identity);
-            song.Remove(song[0]);
-        }
+        SongCalculations();
     }
-    public void spawningLogic(List<int> locations)
-    {
-        List<int> newLocations = new List<int>();
-        
-        foreach (int location in locations)
-        {
-            newLocations.AddRange(locations);
-        }
-    }
-    
-    IEnumerable RepeatSpawning()
-    {
-        while (true)
-        {
-            //spawningLogic(possibleLocations[Random.Range(0,possibleLocations.Count-1)]);
-            yield return new WaitForSeconds(2);
-        }
-    }
+
+    //splits the CVS File into readable values and fills a list of notes based on the CVS File.
     private void ReadTextFile(TextAsset file)
     {
         Notes note = new Notes();
         string[] data = file.text.Split('\n');
 
         //Debug.Log(data.Length);
-        for (int i = 1; i < data.Length; i++)
+        for (int i = 2; i < data.Length; i++)
         {
             note = new Notes();
+            note.songSpeed = Convert.ToInt32(data[1].Trim());
             string[] row = data[i].Split(new char[] { ',' });
             note.time = ConvertTimeIntoFloat(Convert.ToInt32(row[0]), Convert.ToInt32(row[1]), Convert.ToInt32(row[2]));
             note.column = Convert.ToInt32(row[3]);
@@ -90,7 +71,7 @@ public class SpawningManager : MonoBehaviour
             }
         }
     }
-
+    
     public void resetSongData()
     {
         song = new List<Notes> { };
@@ -100,6 +81,18 @@ public class SpawningManager : MonoBehaviour
         [SerializeField] public int column;
         [SerializeField] public float time;
         [SerializeField] public GameObject obj;
+        [SerializeField, Range(1, 4)] public float songSpeed;
     }
 
+    private void SongCalculations()
+    {
+        //This will keep a time with delay
+        songTime = Time.time - delaySongAfterStart;
+        if (song.Count > 0 && songTime >= song[0].time)
+        {
+            Instantiate(song[0].obj, spawnLoc[song[0].column].position, Quaternion.identity);
+            song.Remove(song[0]);
+        }
+    }
+    
 }

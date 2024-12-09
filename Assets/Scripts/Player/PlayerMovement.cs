@@ -120,4 +120,8 @@ public class PlayerMovement : MonoBehaviour
             sinTime = 0;
         }
     }
+    private void PlayMovementSound()
+    {
+        SoundManager.PlaySound(SoundType.Movement, .5f);
+    }
 }
