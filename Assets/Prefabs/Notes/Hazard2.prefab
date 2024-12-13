@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5397625416323756910}
   - component: {fileID: 4088234666501947706}
   m_Layer: 0
-  m_Name: Note
-  m_TagString: Untagged
+  m_Name: Hazard2
+  m_TagString: Note
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,7 +197,7 @@ SpriteRenderer:
   m_SortingLayerID: -1981114817
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2045471316, guid: ac24001ef30388c4689a30eb9806625a, type: 3}
+  m_Sprite: {fileID: 1198407109, guid: 1367705cc425db743a3419a9f10e4486, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

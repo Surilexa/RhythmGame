@@ -11,6 +11,8 @@ public class SpawningManager : MonoBehaviour
     private Dictionary<string, GameObject> spawnableDictionary;
 
     public List<Notes> song = new List<Notes>();
+
+    public float noteSpeed = 1;
     
     //Variables
     private float delaySongAfterStart = 3;
@@ -33,7 +35,7 @@ public class SpawningManager : MonoBehaviour
     {
         Notes note = new Notes();
         string[] data = file.text.Split('\n');
-
+        noteSpeed = Convert.ToInt32(data[1].Trim());
         //Debug.Log(data.Length);
         for (int i = 2; i < data.Length; i++)
         {
@@ -67,7 +69,6 @@ public class SpawningManager : MonoBehaviour
             if (obj != null)
             {
                 spawnableDictionary.Add(obj.name, obj);
-                Debug.Log(spawnableDictionary["Note"]);
             }
         }
     }
@@ -90,7 +91,7 @@ public class SpawningManager : MonoBehaviour
         songTime = Time.time - delaySongAfterStart;
         if (song.Count > 0 && songTime >= song[0].time)
         {
-            Instantiate(song[0].obj, spawnLoc[song[0].column].position, Quaternion.identity);
+            Instantiate(song[0].obj, spawnLoc[song[0].column-1].position, Quaternion.identity);
             song.Remove(song[0]);
         }
     }

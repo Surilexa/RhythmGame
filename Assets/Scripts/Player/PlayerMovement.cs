@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         target.position = movementInfo.MovementLocations[0].position;
         previousPosition = currentPosition;
         currentPosition = 0;
+        //PlayMovementSound();
     }
     private void PerformedFKey(InputAction.CallbackContext key)
     {
@@ -87,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
         target.position = movementInfo.MovementLocations[1].position;
         previousPosition = currentPosition;
         currentPosition = 1;
+        //PlayMovementSound();
     }
     private void PerformedJKey(InputAction.CallbackContext key)
     {
@@ -94,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         target.position = movementInfo.MovementLocations[2].position;
         previousPosition = currentPosition;
         currentPosition = 2;
+        //PlayMovementSound();
     }
     private void PerformedKKey(InputAction.CallbackContext key)
     {
@@ -101,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
         target.position = movementInfo.MovementLocations[3].position;
         previousPosition = currentPosition;
         currentPosition = 3;
+        //PlayMovementSound();
     }
 
     //this will move the player to to a set location based on the key pressed. 
