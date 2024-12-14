@@ -34,3 +34,9 @@ Min,Sec,Milisec,Column,Shape
 0,15,800,2,Hazard1
 0,15,800,3,Note
 0,16,200,3,Hazard1
+0,16,600,4,Note
+0,17,0,4,Hazard1
+0,17,0,3,Note
+0,17,400,3,Hazard1
+0,17,400,2,Note
+0,17,800,2,Hazard1

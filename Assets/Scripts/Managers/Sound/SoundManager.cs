@@ -28,8 +28,11 @@ public class SoundManager : MonoBehaviour
     public static void PlaySound(SoundType sound, float volume = 1)
     {
         AudioClip[] clips = instance.soundList[(int) sound].Sounds;
-        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        instance.audioSource.PlayOneShot(randomClip, volume);
+        AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length-1)];
+        if(randomClip != null)
+        {
+            instance.audioSource.PlayOneShot(randomClip, volume);
+        }
     }
 #if UNITY_EDITOR
     private void OnEnable()

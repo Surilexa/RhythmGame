@@ -24,6 +24,7 @@ public class SpawningManager : MonoBehaviour
         CacheDictionary();
         TextAsset songFile = Resources.Load<TextAsset>("NewSong");
         ReadTextFile(songFile);
+        SoundManager.PlaySound(SoundType.Songs, 1);
     }
     private void Update()
     {
@@ -46,20 +47,13 @@ public class SpawningManager : MonoBehaviour
             note.column = Convert.ToInt32(row[3]);
 
             note.obj = spawnableDictionary[row[4].Trim()];
-            
 
-
-            Debug.Log("Time: " + note.time);
-            Debug.Log("Column: " + note.column);
-            Debug.Log("Type: " + note.obj);
             song.Add(note);
-            Debug.Log("Song Length: " + song.Count);
             
         }
     }
     private float ConvertTimeIntoFloat(int min, int sec, int mil)
     {
-        //Debug.Log("Finished Time " + ((60f * min) + (sec) + (mil / 1000f)));
         return ((60f * min) + (sec) + (mil / 1000f));
     }
     private void CacheDictionary()

@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     MovementInfo movementInfo;
     [SerializeField] private InputActionReference D_key, F_key, J_key, K_key;
     [SerializeField] private AnimationCurve speedCurve;
+    [SerializeField] private GameObject moveEffect;
+    [SerializeField] private Transform moveEffectTarget;
 
     private int previousPosition = 0;
     private int currentPosition = 0;
@@ -80,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         target.position = movementInfo.MovementLocations[0].position;
         previousPosition = currentPosition;
         currentPosition = 0;
-        //PlayMovementSound();
+        PlayMovementEffect();
     }
     private void PerformedFKey(InputAction.CallbackContext key)
     {
@@ -88,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         target.position = movementInfo.MovementLocations[1].position;
         previousPosition = currentPosition;
         currentPosition = 1;
-        //PlayMovementSound();
+        PlayMovementEffect();
     }
     private void PerformedJKey(InputAction.CallbackContext key)
     {
@@ -96,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         target.position = movementInfo.MovementLocations[2].position;
         previousPosition = currentPosition;
         currentPosition = 2;
-        //PlayMovementSound();
+        PlayMovementEffect();
     }
     private void PerformedKKey(InputAction.CallbackContext key)
     {
@@ -104,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
         target.position = movementInfo.MovementLocations[3].position;
         previousPosition = currentPosition;
         currentPosition = 3;
-        //PlayMovementSound();
+        PlayMovementEffect();
     }
 
     //this will move the player to to a set location based on the key pressed. 
@@ -124,8 +126,9 @@ public class PlayerMovement : MonoBehaviour
             sinTime = 0;
         }
     }
-    private void PlayMovementSound()
+    private void PlayMovementEffect()
     {
-        SoundManager.PlaySound(SoundType.Movement, .5f);
+        //SoundManager.PlaySound(SoundType.Movement, .5f);
+        Instantiate(moveEffect, moveEffectTarget.position, Quaternion.identity);
     }
 }
